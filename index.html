@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css"> -->
+    <link rel="stylesheet" href="style.css">
+    <title></title>
+  </head>
+  <body>
+    <div id = "screen">
+      <section id = "game">
+        <div id="question">
+          <h1 id="questionDisplay"></h1>
+        </div>
+        <div id="responses">
+          <button class="options" id="optionA">optionA</button>
+          <button class="options" id="optionB">optionB</button>
+          <!-- <div id="countDown"></div> -->
+          <button class="options" id="optionC">optionC</button>
+          <button class="options" id="optionD">optionD</button>
+        </div>
+      </section>
+
+      <section id="console">
+        <div id="nextMove">
+          <h1> It is player <span id="currentPlayer"></span>'s turn </h1>
+        </div>
+        <div id="scoreBoard">
+          <h1> Total Score </h1>
+          <h3> Player 1 has won <span id="player1Score"></span> rounds</h3>
+          <h3> Player 2 has won <span id="player2Score"></span> rounds</h3>
+        </div>
+        <button class="ctrlButton" id="buttonClearRound">Restart Round</button>
+        <button class="ctrlButton" id="buttonClearGame">Restart Game</button>
+      </section>
+
+    </div>
+
+    <script  src="jquery.min.js" charset="utf-8"> </script>
+    <script type="text/javascript" src="main.js"></script>
+  </body>
+</html>
