@@ -23,15 +23,19 @@
 
       <section id="console">
         <div id="nextMove">
-          <h1> It is player <span id="currentPlayer"></span>'s turn </h1>
+
+          <h1> It's player <br>
+            <span id="currentPlayer"></span>'s 
+            turn </h1>
         </div>
         <div id="scoreBoard">
           <h1> Total Score </h1>
-          <h3> Player 1 has won <span id="player1Score"></span> rounds</h3>
-          <h3> Player 2 has won <span id="player2Score"></span> rounds</h3>
+          <h3> Round: <span id="currentRound"></span> / <span id="totalRounds"></span></h3>
+          <h3> Player 1 has <span id="player1Score"></span> correct answers</h3>
+          <h3> Player 2 has <span id="player2Score"></span> correct answers</h3>
         </div>
-        <button class="ctrlButton" id="buttonClearRound">Restart Round</button>
-        <button class="ctrlButton" id="buttonClearGame">Restart Game</button>
+        <button class="ctrlButton" id="buttonClearScores">Clear Scores</button>
+        <button class="ctrlButton" id="buttonResetDeck">Reset Questions</button>
       </section>
 
     </div>

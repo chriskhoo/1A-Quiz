@@ -143,22 +143,27 @@ $(document).ready(function() {
     answer: 'B'
   }];
 
-  var totalCards = deckArray.length;
-  var playerScore = [0,0,0];
+  var remainingCards = null;
+  var playerScore = [0, 0, 0];
   var currentPlayer = 1;
-  var currentRound = 0;
+  var currentRound = 1;
   var response = null;
   var randomCard = null;
   var totalRounds = 10;
+  var playedCards = [];
+  var randomCardNum = null;
 
-  function displaySetup(){
-      $('#currentPlayer').html(currentPlayer);
-      $('#player1Score').html(playerScore[1]);
-      $('#player2Score').html(playerScore[2]);
+  function displaySetup() {
+    $('#currentPlayer').html(currentPlayer);
+    $('#player1Score').html(playerScore[1]);
+    $('#player2Score').html(playerScore[2]);
+    $('#currentRound').html(currentRound);
+    $('#totalRounds').html(totalRounds);
   }
 
   var pullRandomCard = function(deckArray) {
-    var randomCardNum = Math.ceil(totalCards * Math.random());
+    remainingCards = deckArray.length;
+    randomCardNum = Math.floor(remainingCards * Math.random());
     randomCard = deckArray[randomCardNum];
     $('#questionDisplay').html(randomCard.question);
     $('#optionA').html(randomCard.optionA);
@@ -167,99 +172,135 @@ $(document).ready(function() {
     $('#optionD').html(randomCard.optionD);
   };
 
-  function getResponse(){
-  $("#optionA").click(answerClick);
-  $("#optionB").click(answerClick);
-  $("#optionC").click(answerClick);
-  $("#optionD").click(answerClick);
+  function getResponse() {
+    $("#optionA, #optionB, #optionC, #optionD").click(answerClick);
+    $("#buttonClearScores").click(clearScores);
+    $("#buttonResetDeck").click(resetQuestions);
   }
 
-function checkResponse(){
-  if(randomCard.answer == response){
-    console.log("right answer");
-    // play right answer tone
-    if (currentPlayer == 1){
-      playerScore[1]++;
-      currentPlayer = 2;
+  function checkResponse() {
+    if (randomCard.answer == response) {
+      console.log("right answer");
+      // play right answer tone
+      if (currentPlayer == 1) {
+        playerScore[1]++;
+        currentPlayer = 2;
+      } else {
+        playerScore[2]++;
+        currentPlayer = 1;
+      }
+      currentRound++;
+    } else {
+      console.log("wrong answer");
+      // play right answer tone
+      if (currentPlayer == 1) {
+        currentPlayer = 2;
+      } else {
+        currentPlayer = 1;
+      }
+      currentRound++;
     }
+  }
+
+  function answerClick() {
+    response = this.id[6];
+    console.log(response);
+    checkResponse();
+    if (currentRound > totalRounds) {
+      displaySetup();
+      var winner = whoWon();
+      if (whoWon() == 3) {
+        alert("It's a draw, try again.");
+      } else {
+        alert("Game over, player " + winner + " wins!");
+      }
+    clearScores();
+    }
+
     else {
-      playerScore[2]++;
-      currentPlayer =1;
+      deckArray.splice(randomCardNum,1);
+      playedCards.push(randomCard);
+      console.log("played"+playedCards);
+      console.log("original deck"+deckArray);
+      displaySetup();
+      pullRandomCard(deckArray);
     }
-  currentRound++;
   }
 
-  else{
-    console.log("wrong answer");
-    // play right answer tone
-    if (currentPlayer == 1){
-      currentPlayer = 2;
+  function whoWon() {
+    if (playerScore[1] == playerScore[2]) {
+      return 3;
+    } else if (playerScore[1] > playerScore[2]) {
+      return 1;
+    } else {
+      return 2;
     }
-    else {
-      currentPlayer =1;
-    }
-    currentRound++;
   }
-}
 
-function answerClick(){
-  response = this.id[6];
-  console.log(response);
-  
-}
+  function clearScores(){
+    // to be defined
+    playerScore = [0, 0, 0];
+    currentPlayer = 1;
+    currentRound = 0;
+    response = null;
+    randomCard = null;
+    displaySetup();
+    // pull a random card
+    pullRandomCard(deckArray);
+  }
 
+  function resetQuestions(){
+    playerScore = [0, 0, 0];
+    currentPlayer = 1;
+    currentRound = 0;
+    response = null;
+    randomCard = null;
+    playedCards.forEach(function(card){
+      deckArray.push(card);
+    });
+    playedCards=[];
+    displaySetup();
+    // pull a random card
+    pullRandomCard(deckArray);
+  }
 
-function gameInit(){
-  // display all scores & player
-  displaySetup();
-  // pull a random card
-  pullRandomCard(deckArray);
-  // update game display
-  getResponse();
-}
+  function gameInit() {
+    // display all scores & player
+    displaySetup();
+    // pull a random card
+    pullRandomCard(deckArray);
+    // update game display
+    getResponse();
+  }
 
-gameInit();
+  gameInit();
 
-// required functions
-// function numberOfQuestions(){
-//   return totalRounds;
-// }
-//
-// function currentQuestion(){
-//   return randomCardNum;
-// }
-//
-// function correctAnswer(){
-//   return randomCard.answer;
-// }
-//
-// function numberOfAnswers(){
-//   return randomCard.length;
-// }
-//
-// function playTurn(response){
-//   return randomCard.answer == response;
-// }
-//
-// function isGameOver(){
-//   return currentRound == 10;
-// }
-//
-// function whoWon(){
-//   if(playerScore[1]==playerScore[2]){
-//     return 3;
-//   }
-//   else if(playerScore[1]>playerScore[2]){
-//     return 1;
-//   }
-//   else{
-//     return 2;
-//   }
-// }
+  // required functions
+  // function numberOfQuestions(){
+  //   return totalRounds;
+  // }
 
-// function restart(){
-//   // to be defined
-// }
+  // function currentQuestion(){
+  //   return randomCardNum;
+  // }
+
+  // function correctAnswer(){
+  //   return randomCard.answer;
+  // }
+
+  // function numberOfAnswers(){
+  //   return randomCard.length;
+  // }
+
+  // function playTurn(response){
+  //   return randomCard.answer == response;
+  // }
+
+  // function isGameOver(){
+  //   return currentRound == 10;
+  // }
+  //
+
 
 
 

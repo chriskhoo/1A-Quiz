@@ -1,7 +1,6 @@
 /*box-sizing fix*/
 html {
   box-sizing: border-box;
-  font-family: 'Amatic SC', cursive;
   height:100%;
   width:100%;
   margin:0;
@@ -22,12 +21,13 @@ body{
   text-align: center;
 }
 #game{
-  height:100%;
-  width:50%;
+  height:90%;
+  width:45%;
   text-align: center;
   border: 3px solid black;
   display: inline-block;
   vertical-align: top;
+  margin: 5%;
 }
 
 #question{
@@ -39,7 +39,7 @@ body{
 }
 
 #responses{
-  height: 40%;
+  height: 50%;
   width: 80%;
   margin: 5% auto;
   display: block;
@@ -67,10 +67,11 @@ body{
 #console{
   display: inline-block;
   vertical-align: top;
-  height:100%;
-  width:25%;
+  height:90%;
+  width:30%;
   border: 2px solid black;
   text-align: center;
+  margin: 5%;
 }
 #nextMove{
   display: block;
@@ -81,9 +82,10 @@ body{
 }
 #scoreBoard{
   display: block;
-  height:40%;
+  height:55%;
   width:80%;
   margin: 5% auto;
   background: green;
+  text-align: left;
 }
 .ctrlButton{}
