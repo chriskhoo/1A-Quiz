@@ -31,11 +31,13 @@ body{
 }
 
 #question{
-  height: 40%;
+  height: 30%;
   width: 80%;
   margin: 5% auto;
   display: block;
   background: blue;
+  text-align: left;
+  font-size: 1em;
 }
 
 #responses{
@@ -51,6 +53,7 @@ body{
   width: 40%;
   margin: 4%;
   vertical-align: middle;
+  font-size: 0.8em;
 }
 #optionA{}
 #optionB{}
@@ -79,6 +82,7 @@ body{
   width:80%;
   margin: 5% auto;
   background: blue;
+  font-size: 1em;
 }
 #scoreBoard{
   display: block;
@@ -87,5 +91,6 @@ body{
   margin: 5% auto;
   background: green;
   text-align: left;
+  font-size: 1em;
 }
 .ctrlButton{}
