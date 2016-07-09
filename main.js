@@ -86,7 +86,7 @@ $(document).ready(function() {
     optionD: 'Old English Sheepdog',
     answer: 'C'
   }, {
-    question: 'What breed is Snoopy from Peasnuts?',
+    question: 'What breed is Snoopy from Peanuts?',
     optionA: 'Border Collie',
     optionB: 'Dachshund',
     optionC: 'Jack Russell Terrier',
@@ -259,6 +259,9 @@ $(document).ready(function() {
   var totalRounds = 10;
   var playedCards = [];
   var randomCardNum = null;
+  var countDown = 20;
+  var timerId = 0;
+
 
   function displaySetup() {
     if(currentPlayer==1){
@@ -278,7 +281,6 @@ $(document).ready(function() {
 
   var pullRandomCard = function(deckArray) {
     remainingCards = deckArray.length;
-    console.log(remainingCards);
     randomCardNum = Math.floor(remainingCards * Math.random());
     randomCard = deckArray[randomCardNum];
     $('#questionDisplay').html(randomCard.question);
@@ -286,12 +288,20 @@ $(document).ready(function() {
     $('#optionB').html(randomCard.optionB);
     $('#optionC').html(randomCard.optionC);
     $('#optionD').html(randomCard.optionD);
+    startTimer();
   };
 
   function getResponse() {
     $("#optionA, #optionB, #optionC, #optionD").click(answerClick);
     $("#buttonClearScores").click(clearScores);
     $("#buttonResetDeck").click(resetQuestions);
+  }
+
+  function answerClick() {
+    response = this.id[6];
+    console.log(response);
+    checkResponse();
+    endOfRound();
   }
 
   function checkResponse() {
@@ -318,29 +328,6 @@ $(document).ready(function() {
     }
   }
 
-  function answerClick() {
-    response = this.id[6];
-    console.log(response);
-    checkResponse();
-    if (currentRound > totalRounds) {
-      displaySetup();
-      var winner = whoWon();
-      if (whoWon() == 3) {
-        alert("It's a draw, try again.");
-      } else {
-        alert("Game over, player " + winner + " wins!");
-      }
-    clearScores();
-    }
-
-    else {
-      deckArray.splice(randomCardNum,1);
-      playedCards.push(randomCard);
-      displaySetup();
-      pullRandomCard(deckArray);
-    }
-  }
-
   function whoWon() {
     if (playerScore[1] == playerScore[2]) {
       return 3;
@@ -351,11 +338,32 @@ $(document).ready(function() {
     }
   }
 
+  function discardCard(){
+    deckArray.splice(randomCardNum,1);
+    playedCards.push(randomCard);
+  }
+
+  function checkGameOver(){
+    if (currentRound > totalRounds) {
+      var winner = whoWon();
+      if (winner == 3) {
+        alert("It's a draw, try again.");
+      } else {
+        alert("Game over, player " + winner + " wins!");
+      }
+    clearScores();
+    }
+
+    else {
+      pullRandomCard(deckArray);
+    }
+  }
+
   function clearScores(){
     // to be defined
     playerScore = [0, 0, 0];
     currentPlayer = 1;
-    currentRound = 0;
+    currentRound = 1;
     response = null;
     randomCard = null;
     displaySetup();
@@ -378,6 +386,47 @@ $(document).ready(function() {
     pullRandomCard(deckArray);
   }
 
+  function startTimer(){
+    timerId = setInterval(function(){
+    countDown--;
+    $('#countDown').html(countDown);
+  },1000);
+    $('#countDown').html(countDown);
+  }
+
+  function clearTimer(){
+    clearInterval(timerId);
+    countDown= 20;
+    $('#countDown').html(countDown);
+  }
+
+  function endOfRound(){
+    clearTimer();
+    discardCard();
+    displaySetup();
+    checkGameOver();
+  }
+
+  function checkTimeOver(){
+    setInterval(function(){
+      if(countDown<=0){
+        console.log("time's up");
+        if (currentPlayer == 1) {
+          currentPlayer = 2;
+        } else {
+          currentPlayer = 1;
+        }
+        currentRound++;
+        endOfRound();
+      }
+
+    },100);
+  }
+
+
+
+
+
   function gameInit() {
     // display all scores & player
     displaySetup();
@@ -385,9 +434,13 @@ $(document).ready(function() {
     pullRandomCard(deckArray);
     // update game display
     getResponse();
+    checkTimeOver();
   }
 
+  // stopwatch.init();
   gameInit();
+
+
 
   // required functions
   // function numberOfQuestions(){

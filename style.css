@@ -31,21 +31,24 @@ body{
 }
 
 #question{
-  height: 30%;
+  height: 25%;
   width: 80%;
   margin: 5% auto;
   display: block;
   background: blue;
   text-align: left;
   font-size: 1em;
+  color:white;
 }
 
 #responses{
-  height: 50%;
+  height: 55%;
   width: 80%;
   margin: 5% auto;
   display: block;
   background: green;
+  position: relative;
+  text-align: center;
 }
 
 .options{
@@ -54,17 +57,26 @@ body{
   margin: 4%;
   vertical-align: middle;
   font-size: 0.8em;
+  position: relative;
 }
 #optionA{}
 #optionB{}
 #optionC{}
 #optionD{}
-#countDown{
-  height: 10%;
-  width: 10%;
-  position: relative;
+#timerContainer{
+  height: 30%;
+  width: 30%;
+  position: absolute;
+  top: 35%;
+  left: 35%;
   background: pink;
-  margin: 0;
+  border-radius: 100%;
+  z-index: 1;
+  display: flex;
+}
+#countDown{
+  margin: auto;
+  background-color: blue;
 }
 
 #console{

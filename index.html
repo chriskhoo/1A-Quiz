@@ -2,8 +2,7 @@
 <html>
   <head>
     <meta charset="utf-8">
-    <!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css"> -->
-    
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
     <link rel="stylesheet" href="style.css">
     <title></title>
   </head>
@@ -11,12 +10,12 @@
     <div id = "screen">
       <section id = "game">
         <div id="question">
-          <h1 id="questionDisplay"></h1>
+          <h3 id="questionDisplay"></h3>
         </div>
         <div id="responses">
           <button class="options" id="optionA">optionA</button>
           <button class="options" id="optionB">optionB</button>
-          <!-- <div id="countDown"></div> -->
+          <div id=timerContainer><div id="countDown"></div></div>
           <button class="options" id="optionC">optionC</button>
           <button class="options" id="optionD">optionD</button>
         </div>
@@ -25,13 +24,13 @@
       <section id="console">
         <div id="nextMove">
 
-          <h1> It's <span id="currentPlayer"></span>'s turn</h1>
+          <h3> It's <span id="currentPlayer"></span>'s turn</h3>
         </div>
         <div id="scoreBoard">
-          <h1> Total Score </h1>
-          <h3> Round: <span id="currentRound"></span> / <span id="totalRounds"></span></h3>
-          <h3> <span id="player1Name"></span> has <span id="player1Score"></span> correct answers</h3>
-          <h3> <span id="player2Name"></span>  has <span id="player2Score"></span> correct answers</h3>
+          <h3> Total Score </h3>
+          <p> Round: <span id="currentRound"></span> / <span id="totalRounds"></span></p>
+          <p> <span id="player1Name"></span> has <span id="player1Score"></span> correct answers</p>
+          <p> <span id="player2Name"></span>  has <span id="player2Score"></span> correct answers</p>
         </div>
         <button class="ctrlButton" id="buttonClearScores">Clear Scores</button>
         <button class="ctrlButton" id="buttonResetDeck">Reset Questions</button>
