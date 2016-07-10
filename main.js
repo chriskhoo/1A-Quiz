@@ -161,7 +161,7 @@ $(document).ready(function() {
     optionB: 'Odie',
     optionC: 'Rocky',
     optionD: 'Snowy',
-    answer: 'A'
+    answer: 'B'
   }, {
     question: "What is the name of Scooby-Doo's Nephew?",
     optionA: 'Spike',
@@ -307,7 +307,7 @@ $(document).ready(function() {
   function checkResponse() {
     if (randomCard.answer == response) {
       console.log("right answer");
-      // play right answer tone
+      soundRight();
       if (currentPlayer == 1) {
         playerScore[1]++;
         currentPlayer = 2;
@@ -318,7 +318,7 @@ $(document).ready(function() {
       currentRound++;
     } else {
       console.log("wrong answer");
-      // play right answer tone
+      soundWrong();
       if (currentPlayer == 1) {
         currentPlayer = 2;
       } else {
@@ -332,9 +332,9 @@ $(document).ready(function() {
     if (playerScore[1] == playerScore[2]) {
       return 3;
     } else if (playerScore[1] > playerScore[2]) {
-      return 1;
+      return player1Name;
     } else {
-      return 2;
+      return player2Name;
     }
   }
 
@@ -347,9 +347,11 @@ $(document).ready(function() {
     if (currentRound > totalRounds) {
       var winner = whoWon();
       if (winner == 3) {
+        soundTie();
         alert("It's a draw, try again.");
       } else {
-        alert("Game over, player " + winner + " wins!");
+        soundWin();
+        alert("Game over, " + winner + " wins!");
       }
     clearScores();
     }
@@ -374,7 +376,7 @@ $(document).ready(function() {
   function resetQuestions(){
     playerScore = [0, 0, 0];
     currentPlayer = 1;
-    currentRound = 0;
+    currentRound = 1;
     response = null;
     randomCard = null;
     playedCards.forEach(function(card){
@@ -400,6 +402,8 @@ $(document).ready(function() {
     $('#countDown').html(countDown);
   }
 
+  $(timerContainer).click(clearTimer);
+
   function endOfRound(){
     clearTimer();
     discardCard();
@@ -423,9 +427,18 @@ $(document).ready(function() {
     },100);
   }
 
-
-
-
+  function soundWin(){
+    $("#sWin")[0].play();
+  }
+  function soundRight(){
+    $("#sRight")[0].play();
+  }
+  function soundWrong(){
+    $("#sWrong")[0].play();
+  }
+  function soundTie(){
+    $("#sTie")[0].play();
+  }
 
   function gameInit() {
     // display all scores & player

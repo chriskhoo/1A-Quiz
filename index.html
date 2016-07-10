@@ -2,43 +2,56 @@
 <html>
   <head>
     <meta charset="utf-8">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+    <!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css"> -->
     <link rel="stylesheet" href="style.css">
+    <link href='https://fonts.googleapis.com/css?family=Kranky|Monoton|Mountains+of+Christmas|Rye|Sancreek' rel='stylesheet' type='text/css'>
     <title></title>
   </head>
   <body>
     <div id = "screen">
+      <div id ="title"><h1>Top dogs</h1></div>
+      <div id="container">
       <section id = "game">
         <div id="question">
           <h3 id="questionDisplay"></h3>
         </div>
         <div id="responses">
-          <button class="options" id="optionA">optionA</button>
-          <button class="options" id="optionB">optionB</button>
-          <div id=timerContainer><div id="countDown"></div></div>
-          <button class="options" id="optionC">optionC</button>
-          <button class="options" id="optionD">optionD</button>
+          <div id="timerContainer"><div id="countDown"></div></div>
+          <div id="section2">
+            <button class="options" id="optionA">optionA</button>
+            <div class= "nails nail1">A</div>
+            <button class="options" id="optionB">optionB</button>
+            <div class= "nails">B</div>
+            <button class="options" id="optionC">optionC</button>
+            <div class= "nails">C</div>
+            <button class="options" id="optionD">optionD</button>
+            <div class= "nails">D</div>
+          </div>
         </div>
       </section>
 
       <section id="console">
         <div id="nextMove">
 
-          <h3> It's <span id="currentPlayer"></span>'s turn</h3>
+          <h3> It's <span class="emphasis" id="currentPlayer"></span>'s turn</h3>
         </div>
         <div id="scoreBoard">
-          <h3> Total Score </h3>
-          <p> Round: <span id="currentRound"></span> / <span id="totalRounds"></span></p>
-          <p> <span id="player1Name"></span> has <span id="player1Score"></span> correct answers</p>
-          <p> <span id="player2Name"></span>  has <span id="player2Score"></span> correct answers</p>
+          <h3 class="scoreElm"> Total Score </h3>
+          <p class="scoreElm"> Round: <span class="emphasis" id="currentRound"></span> / <span class="emphasis" id="totalRounds"></span></p>
+          <p class="scoreElm"> <span class="emphasis" id="player1Name"></span> has <span class="emphasis" id="player1Score"></span> correct answers</p>
+          <p class="scoreElm"> <span class="emphasis" id="player2Name"></span>  has <span class="emphasis" id="player2Score"></span> correct answers</p>
         </div>
         <button class="ctrlButton" id="buttonClearScores">Clear Scores</button>
         <button class="ctrlButton" id="buttonResetDeck">Reset Questions</button>
       </section>
-
+    </div>
     </div>
 
     <script  src="jquery.min.js" charset="utf-8"> </script>
     <script type="text/javascript" src="main.js"></script>
+    <audio id="sWin" src="./sounds/1_person_cheering-Jett_Rifkin-1851518140.mp3"></audio>
+    <audio id="sRight" src="./sounds/Dog Woof-SoundBible.com-457935112.wav"></audio>
+    <audio id="sWrong" src="./sounds/Dog Growl-SoundBible.com-792375621.wav"></audio>
+    <audio id="sTie" src="./sounds/Uh Oh Baby-SoundBible.com-1858856676.mp3"></audio>
   </body>
 </html>
